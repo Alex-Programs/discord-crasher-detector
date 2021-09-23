@@ -36,14 +36,14 @@ async def get_and_check(path):
         await f.write(await resp.read())
         await f.close()
     
-    result = parse_crap_asyncio(str(await asyncio.wait([asyncio.get_event_loop().run_in_executor(executor, video_is_corrupt, name)])))
+    result = parse_asyncio(str(await asyncio.wait([asyncio.get_event_loop().run_in_executor(executor, video_is_corrupt, name)])))
     await session.close()
 
     os.remove(name)
 
     return result
 
-def parse_crap_asyncio(i):
+def parse_asyncio(i):
     if "True" in i:
         return True
     else:
